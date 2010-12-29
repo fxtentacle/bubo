@@ -5,10 +5,10 @@ require 'json'
 
 
 class Bubo
-#  HOSTNAME = 'bubo.heroku.com'
-#  PORT = 80
-  HOSTNAME = '127.0.0.1'
-  PORT = 3000
+  HOSTNAME = 'bubo.heroku.com'
+  PORT = 80
+#  HOSTNAME = '127.0.0.1'
+#  PORT = 3000
 
   def initialize(email, api_key)
     @settings = { :email => email, :api_key => api_key }
