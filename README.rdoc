@@ -1,19 +1,24 @@
-= bubo
+= Bubo
 
-Description goes here.
+Bubo is an amazing owl. It can memorize your whole image collection and perform fast near-duplicate searches.
+See askbubo.com for more detail.
 
-== Contributing to bubo
+== Using the Bubo search engine
  
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+* b = Bubo.new('email@example.com','API_KEY_HERE')
+* b.add_image('MyFirstImage','https://example.com/images/1.jpg')
+* b.add_image ...
+* Now you might need to wait some time for the system to finish indexing your images. You can check the current status with: b.images_status
+* b.retrieve('https://example.com/images/1-cropped.jpg')
+
+== If you encounter any problems
+Feel free to contact me:
+Hajo Nils Krabbenhoeft
+spratpix GmbH & Co. KG
+hajo AT spratpix DOT com
 
 == Copyright
 
-Copyright (c) 2010 Hajo Nils Krabbenhöft. See LICENSE.txt for
+Copyright (c) 2010 Hajo Nils Krabbenhoeft | spratpix GmbH & Co. KG. See LICENSE.txt for
 further details.
 
