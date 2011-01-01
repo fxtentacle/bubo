@@ -10,7 +10,7 @@ class Bubo
   # You can freely generate API keys on http://api.askbubo.com/users/new
   #
   # If you have any questions, mail {Hajo Nils Krabbenhoeft}[mailto:hajo@spratpix.com].
-  def initialize(email, api_key, host='bubo.heroku.com', port=80)
+  def initialize(email, api_key, host='api.askbubo.com', port=80)
     @settings = { :email => email, :api_key => api_key, :host => host, :port => port }
   end
 
