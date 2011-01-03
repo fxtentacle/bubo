@@ -40,25 +40,25 @@ class Bubo
   # Add a new image to your searchable collection.
   # Returns true or false
   def add_image(key, url)
-    send('images/add', :post, {:key => key, :url => url}) == 'OK'
+    send('images/add', {:key => key, :url => url}) == 'OK'
   end
   
   # Remove an image from your searchable collection.
   # Returns true or false
   def remove_image(key)
-    send('images/remove', :post, {:key => key}) == 'OK'
+    send('images/remove', {:key => key}) == 'OK'
   end
 
   # Get the analysis status of an image in your collection.
   # Returns either:
   #
-  # "OK\t<NUMBER>" where <NUMBER> is the number of feature points used for searching
+  # "OK\tNUMBER" where NUMBER is the number of feature points used for searching
   #
   # or
   #
-  # "FAIL\t<ERROR MESSAGE>"
+  # "FAIL\tERROR MESSAGE"
   def inspect_image(key)
-    send('images/inspect', :get, {:key => key})
+    send('images/inspect', {:key => key})
   end
 
   # Retrieve an array of keys of images, which failed to import.
@@ -73,29 +73,25 @@ class Bubo
   # Returns an array of strings. Each member is either a comment line starting with # or a search result.
   # Search result lines are formatted as:
   #
-  # "<KEY>\t<SCORE>\t<MATRIX>"
+  # "KEY\tSCORE\tMATRIX"
   #
-  # KEY is the key you specified when adding the image
-  # SCORE is a confidence score from 0 to 1 with anything above 0.9 considered excellent
-  # MATRIX is a 2x3 affine transformation matrix which can be used to transform the image specified by KEY as to cover the search image.
+  # KEY is the key you specified when adding the image. 
+  # SCORE is a confidence score from 0 to 1 with anything above 0.9 considered excellent. 
+  # MATRIX is a 2x3 affine transformation matrix which can be used to transform the image specified by KEY as to cover the search image. 
   def retrieve(url)
-    send('images/retrieve', :post, {:url => url}).split("\n")
+    send('images/retrieve', {:url => url}).split("\n")
   end
 
 private
 
-  def send(path, method = :get, form_data = {})
+  def send(path, form_data = {})
     form_data = form_data.merge(api_verification)
     form_data = form_data.inject({}) { |m, (k, v)| m[k.to_s] = v; m }
 
     response = ''
     http = Net::HTTP.new(host, port)
     http.start do |http|
-      if(method == :get)
-        request = Net::HTTP::Get.new('/'+path)
-      else
-        request = Net::HTTP::Post.new('/'+path)
-      end
+      request = Net::HTTP::Post.new('/'+path)
       request.set_form_data(form_data)
       response = http.request(request)
       response = response.body.strip
