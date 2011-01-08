@@ -7,6 +7,16 @@ require 'json'
 class Bubo
   # Create a new Bubo API object.
   #
+  # This version should be used with the heroku.com add-on. 
+  # It will automatically read it's configuration from ENV[:BUBO_LOGIN].
+  def self.from_heroku
+    login_url = URI.parse(ENV["BUBO_LOGIN"])
+    userpass = login_url.query.split(":")
+    Bubo.new(userpass[0], userpass[1], login_url.host, login_url.port)
+  end
+
+  # Create a new Bubo API object.
+  #
   # You can freely generate API keys on http://api.askbubo.com/users/new
   #
   # If you have any questions, mail {Hajo Nils Krabbenhoeft}[mailto:hajo@spratpix.com].
